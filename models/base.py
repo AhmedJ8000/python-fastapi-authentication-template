@@ -8,6 +8,7 @@ Base = declarative_base()
 #  TeaModel extends SQLAlchemy's Base class.
 #  Extending Base lets SQLAlchemy 'know' about our model, so it can use it.
 
+
 class BaseModel(Base):
 
     # This will be used directly to make a
@@ -17,6 +18,5 @@ class BaseModel(Base):
 
     id = Column(Integer, primary_key=True, index=True)
 
-    crated_at = Column(DateTime, default=func.now())
+    created_at = Column(DateTime, default=func.now())
     updated_at = Column(DateTime, default=func.now(), onupdate=func.now())
-
