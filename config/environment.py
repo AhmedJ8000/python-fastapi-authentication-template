@@ -1,2 +1,0 @@
-# config/environment.py
-db_URI = "postgresql://dujota@localhost:5432/teas_seb11"
