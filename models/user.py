@@ -1,27 +1,32 @@
+# models/user.py
+
 from sqlalchemy import Column, Integer, String
-from .base import BaseModel
+from .base import Base
 from passlib.context import CryptContext
 from datetime import datetime, timedelta, timezone  # New import for timestamps
 import jwt  # New import for token generation
+
+# Import the secret from the environment file
 from config.environment import secret
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 
-class UserModel(BaseModel):
+class UserModel(Base):
 
     __tablename__ = "users"
+
     id = Column(Integer, primary_key=True, index=True)
-    username = Column(String, unique=True)
-    email = Column(String, unique=True)
-    password = Column(String, nullable=False)
+    username = Column(String, nullable=False, unique=True)
+    email = Column(String, nullable=False, unique=True)
+    password = Column(String, nullable=True)
 
     def set_password(self, password: str):
         self.password = pwd_context.hash(password)
 
     # Method to verify the password
     def verify_password(self, password: str) -> bool:
-        return pwd_context.verify(password, self.password_hash)
+        return pwd_context.verify(password, self.password)
 
     # Method to generate a JWT token
     def generate_token(self):
