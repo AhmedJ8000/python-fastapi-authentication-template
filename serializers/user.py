@@ -17,4 +17,19 @@ class UserSchema(BaseModel):
     email: str
 
     class Config:
+        from_attributes = True
+
+
+# New schema for user login (captures username and password during login)
+class UserLogin(BaseModel):
+    username: str  # Username provided by the user during login
+    password: str  # Plain text password provided by the user during login
+
+
+# New schema for the response (containing the JWT token and a success message)
+class UserToken(BaseModel):
+    token: str  # JWT token generated upon successful login
+    message: str  # Success message
+
+    class Config:
         orm_mode = True

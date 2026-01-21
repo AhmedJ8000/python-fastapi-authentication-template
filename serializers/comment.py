@@ -1,21 +1,23 @@
 from pydantic import BaseModel
 
-class CommentSchema(BaseModel):
-  id: int
-  content: str
 
-  class Config:
-    orm_mode = True
+class CommentSchema(BaseModel):
+    id: int
+    content: str
+
+    class Config:
+        from_attributes = True
 
 
 class CommentCreateSchema(BaseModel):
-  content: str
+    content: str
 
-  class Config:
-    orm_mode = True
+    class Config:
+        from_attributes = True
+
 
 class CommentUpdateSchema(BaseModel):
-  content: str
+    content: str
 
-  class Config:
-    orm_mode = True
+    class Config:
+        from_attributes = True
